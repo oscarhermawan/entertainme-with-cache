@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const responseTime = require('response-time')
 
 mongoose.connect('mongodb://localhost/leraning-cache', (err)=>{
   if(err){
@@ -12,8 +13,9 @@ mongoose.connect('mongodb://localhost/leraning-cache', (err)=>{
   }
 })
 
-const movies = require('./routes/movie')
 
+const movies = require('./routes/movie')
+app.use(responseTime())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 
